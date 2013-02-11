@@ -55,4 +55,11 @@ OcCharts::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
+  resources :stock_charts
+
+  # match '/goto_stock_chart', :to => redirect('/stock_charts/%{symbol}')  # not working
+  match 'goto_stock_chart', :to => redirect { |params, req|  "/stock_charts/#{req.query_parameters[:symbol]}"  }
+
+  get 'stock_prices/:id' => 'stock_prices#show'
 end

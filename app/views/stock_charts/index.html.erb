@@ -1,5 +1,12 @@
-<h1>Listing stock_charts</h1>
+<h1>Stock Chart</h1>
 
+<%= form_tag(goto_stock_chart_path, method: "get") do %>
+    <%= label_tag :symbol, "Stock Symbol"  %><br/>
+    <%= text_field_tag :symbol %><br/>
+    <%= submit_tag :draw %>
+<% end %>
+
+<!--
 <table>
   <tr>
     <th></th>
@@ -7,15 +14,16 @@
     <th></th>
   </tr>
 
-<% @stock_charts.each do |stock_chart| %>
+< % @stock_charts.each do |stock_chart| %>
   <tr>
-    <td><%= link_to 'Show', stock_chart %></td>
-    <td><%= link_to 'Edit', edit_stock_chart_path(stock_chart) %></td>
-    <td><%= link_to 'Destroy', stock_chart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>< %= link_to 'Show', stock_chart %></td>
+    <td>< %= link_to 'Edit', edit_stock_chart_path(stock_chart) %></td>
+    <td>< %= link_to 'Destroy', stock_chart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
-<% end %>
+< % end %>
 </table>
+-->
 
-<br />
 
-<%= link_to 'New Stock chart', new_stock_chart_path %>
+
+

@@ -13,3 +13,8 @@ GET /stock_charts/AAPL,GOOG
    interval=daily|weekly|monthly
 
    type=candlestick|line   (note: line is only supported in multi stock mode)
+
+
+   StockPrice.find(
+     start_at: "2013-01
+---

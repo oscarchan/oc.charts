@@ -1,9 +1,8 @@
 class StockChartsController < ApplicationController
+
   # GET /stock_charts
   # GET /stock_charts.json
   def index
-    @stock_charts = StockChart.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @stock_charts }
@@ -13,7 +12,16 @@ class StockChartsController < ApplicationController
   # GET /stock_charts/1
   # GET /stock_charts/1.json
   def show
-    @stock_chart = StockChart.find(params[:id])
+    logger.info("param=#{params}")
+
+    symbol = params[:id]
+
+    if symbol.blank? 
+      logger.warn("missing symbol")
+      flash[:error] = 'missing stock symbol'
+      redirect_to :action => 'index'
+      return 
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -33,12 +41,15 @@ class StockChartsController < ApplicationController
   end
 
   # GET /stock_charts/1/edit
+=begin
   def edit
     @stock_chart = StockChart.find(params[:id])
   end
+=end
 
-  # POST /stock_charts
+  # POST /sto0ck_charts
   # POST /stock_charts.json
+=begin
   def create
     @stock_chart = StockChart.new(params[:stock_chart])
 
@@ -52,9 +63,11 @@ class StockChartsController < ApplicationController
       end
     end
   end
+=end
 
   # PUT /stock_charts/1
   # PUT /stock_charts/1.json
+=begin
   def update
     @stock_chart = StockChart.find(params[:id])
 
@@ -68,9 +81,11 @@ class StockChartsController < ApplicationController
       end
     end
   end
+=end
 
   # DELETE /stock_charts/1
   # DELETE /stock_charts/1.json
+=begin
   def destroy
     @stock_chart = StockChart.find(params[:id])
     @stock_chart.destroy
@@ -80,4 +95,5 @@ class StockChartsController < ApplicationController
       format.json { head :no_content }
     end
   end
+=end
 end
