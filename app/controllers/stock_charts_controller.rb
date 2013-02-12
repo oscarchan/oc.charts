@@ -14,9 +14,9 @@ class StockChartsController < ApplicationController
   def show
     logger.info("param=#{params}")
 
-    symbol = params[:id]
+    @id = params[:id]
 
-    if symbol.blank? 
+    if @id.blank?
       logger.warn("missing symbol")
       flash[:error] = 'missing stock symbol'
       redirect_to :action => 'index'

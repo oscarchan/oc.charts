@@ -9,7 +9,7 @@
       function drawVisualization() {
         $.ajax(
         {
-          url: "<%=  %>",
+          url: "<%= stock_price_url(@id) %>",
           dataType: "json",
           async: false,
           error: function(xhr, status, thrown) {
@@ -23,7 +23,7 @@
             var options = {legend:'none', width:600, height:400};
 
 
-            var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+            var chart = new google.visualization.CandlestickChart(document.getElementById('visualization'));
             chart.draw(dataTable, options);
           }
         });

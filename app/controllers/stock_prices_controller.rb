@@ -5,8 +5,8 @@ class StockPricesController < ApplicationController
     logger.info("param=#{params}")
 
     symbol = params[:id]
-    #date_range = Date.today..(Date.today - 5)
-    date_range = Date.parse('2000-11-19')..Date.parse('2000-12-19')
+    date_range = (Date.today - 30)..(Date.today - 1)
+    logger.info("date_range1=#{date_range}")
 
     @stock_prices = StockPrice.find_historical_price(symbol, date_range)
 

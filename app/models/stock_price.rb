@@ -41,10 +41,10 @@ class StockPrice  < ActiveResource::Base
 
     self.find(:all, :params => {
         s: symbol,
-        a: ((start_at.month - 1)),
+        a: (start_at.month - 1),
         b: start_at.day,
         c: start_at.year,
-        d: ((end_at.month - 1)),
+        d: (end_at.month - 1),
         e: end_at.day,
         f: end_at.year,
         g: 'd',

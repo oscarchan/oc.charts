@@ -61,5 +61,8 @@ OcCharts::Application.routes.draw do
   # match '/goto_stock_chart', :to => redirect('/stock_charts/%{symbol}')  # not working
   match 'goto_stock_chart', :to => redirect { |params, req|  "/stock_charts/#{req.query_parameters[:symbol]}"  }
 
-  get 'stock_prices/:id' => 'stock_prices#show'
+  resources :stock_prices, :only => [:show]
+
+  # get 'stock_prices/:id', :to => 'stock_prices#show', :as => :stock_price
+
 end

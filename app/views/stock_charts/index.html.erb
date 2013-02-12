@@ -3,6 +3,7 @@
 <%= form_tag(goto_stock_chart_path, method: "get") do %>
     <%= label_tag :symbol, "Stock Symbol"  %><br/>
     <%= text_field_tag :symbol %><br/>
+
     <%= submit_tag :draw %>
 <% end %>
 
