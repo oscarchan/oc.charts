@@ -9,6 +9,18 @@ class StockPrice  < ActiveResource::Base
   # a - month (0=Jan)
   self.format= ActiveResource::Formats::CsvFormat
 
+  schema do
+    string 'date'
+
+    # note: yahoo return string
+    float 'low', 'open', 'close', 'high'
+  end
+
+  def low()   attributes['low'].to_f end
+  def open()  attributes['open'].to_f end
+  def close() attributes['close'].to_f end
+  def high()  attributes['high'].to_f end
+
   class << self
     def query_string(options)
       "?#{hash_to_query(options)}" unless options.nil? || options.empty?
@@ -41,7 +53,7 @@ class StockPrice  < ActiveResource::Base
   end
 
 
-  def to_json(options = {})
+  def as_json(options = {})
     [
 =begin
         Col 0: String (discrete) used as a group label on the X axis, or number, date, datetime or timeofday (continuous) used as a value on the X axis.
@@ -56,7 +68,7 @@ class StockPrice  < ActiveResource::Base
         self.open,
         self.close,
         self.high
-    ].to_json(options)
+    ]
   end
 
 end

@@ -11,14 +11,23 @@ describe StockPrice do
 
   it { should_not be_empty }
 
-  context "should have the proper field" do
+  context "should have the proper attributes" do
     subject(:price) { prices[0] }
 
     its(:date) { should == '2000-12-19' }
-    its('low.to_f')   { should == 14.00 }
-    # open is kernel method
-    specify { price.open.to_f.should == 14.38 }
-    its('close.to_f') { should == 14.00 }
-    its('high.to_f')  { should == 15.25 }
+    its('low')   { should == 14.00 }
+    # open is kernel method unless explicitly overridden
+    # specify { price.open.should == 14.38 }
+    its('open') { should == 14.38 }
+    its('close') { should == 14.00 }
+    its('high')  { should == 15.25 }
+  end
+
+  context "should transform to the right proper json" do
+    subject(:price) { prices[0] }
+
+    its("to_json") { should == [price.date, price.low, price.open, price.close, price.high].to_json}
+    its("to_json") { should == ['2000-12-19', 14.00, 14.38, 14.00, 15.25].to_json}
+
   end
 end
