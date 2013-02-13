@@ -3,11 +3,18 @@
   <script type="text/javascript" src="http://www.google.com/jsapi"></script>
   <script type="text/javascript">
       google.load('visualization', '1', {packages: ['corechart']});
-      google.setOnLoadCallback(drawVisualization);
+      google.setOnLoadCallback(function() {
+          var visual_div = $('#visualization');
+          drawVisualization(visual_div);
+      });
   </script>
 <% end %>
 
-<%= tag("div", :id => 'visualization', :data => { url: stock_price_url(@id, @stock_price_params) }) %>
+<%= tag("div", :id => 'visualization', :data => {
+        url: stock_price_url(@id, @stock_price_params),
+        width: 1200,
+        height: 600
+}) %>
 
 
 <!-- %= link_to 'Edit', edit_stock_chart_path(@stock_chart) % -->
