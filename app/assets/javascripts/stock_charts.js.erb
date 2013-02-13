@@ -1,0 +1,26 @@
+
+function drawVisualization() {
+    var url = $('#visualization').attr('data-url');
+    $.ajax(
+            {
+                url: url,
+                dataType: "json",
+                async: false,
+                error: function (xhr, status, thrown) {
+                    console.log("error me" + xhr + "; status=" + status + "; throw" + thrown);
+                },
+                success: function (jsonData, status, xhr) {
+                    jsonData = [ jsonData, true ];
+
+                    dataTable = google.visualization.arrayToDataTable.apply(null, jsonData);
+                    debugger;
+                    var options = {legend: 'none', width: 600, height: 400};
+
+
+                    var chart = new google.visualization.CandlestickChart(document.getElementById('visualization'));
+                    chart.draw(dataTable, options);
+                }
+            });
+
+
+}

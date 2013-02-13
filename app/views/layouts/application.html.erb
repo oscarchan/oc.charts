@@ -4,8 +4,11 @@
   <title>OcCharts</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <%= include_controller_javascript %>
   <%= yield :javascript_includes %>
-  <%= javascript_include_tag params[:controller] %>
+<!--
+  <%= include_controller_stylesheet %>
+-->
   <%= csrf_meta_tags %>
 </head>
 <body>

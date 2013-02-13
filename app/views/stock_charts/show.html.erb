@@ -1,40 +1,14 @@
 <p id="notice"><%= notice %></p>
-
-
 <% content_for :javascript_includes do %>
   <script type="text/javascript" src="http://www.google.com/jsapi"></script>
   <script type="text/javascript">
       google.load('visualization', '1', {packages: ['corechart']});
-
-      function drawVisualization() {
-        $.ajax(
-        {
-          url: "<%= stock_price_url(@id, @stock_price_params) %>",
-          dataType: "json",
-          async: false,
-          error: function(xhr, status, thrown) {
-            console.log("error me" + xhr + "; status=" + status + "; throw" + thrown);
-          }, 
-          success: function(jsonData, status, xhr) {
-            jsonData = [ jsonData, true ]
-
-            dataTable = google.visualization.arrayToDataTable.apply(null, jsonData);
-            debugger;
-            var options = {legend:'none', width:600, height:400};
-
-
-            var chart = new google.visualization.CandlestickChart(document.getElementById('visualization'));
-            chart.draw(dataTable, options);
-          }
-        });
-      }
-
       google.setOnLoadCallback(drawVisualization);
   </script>
 <% end %>
 
-<div id="visualization"></div>
-​
+<%= tag("div", :id => 'visualization', :data => { url: stock_price_url(@id, @stock_price_params) }) %>
+
 
 <!-- %= link_to 'Edit', edit_stock_chart_path(@stock_chart) % -->
 <!-- %= link_to 'Back', stock_charts_path % -->
