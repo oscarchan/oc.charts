@@ -5,15 +5,16 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= yield :javascript_includes %>
+  <%= javascript_include_tag params[:controller] %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= render 'layouts/header' %>
+<%= render :partial => 'layouts/header' %>
 
 <%= yield %>
 
-<!-- %= render 'layouts/_footer' % -->
+<!-- %= render :partial => 'footer' % -->
 
 </body>
 </html>

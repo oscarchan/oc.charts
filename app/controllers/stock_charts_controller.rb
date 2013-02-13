@@ -15,6 +15,7 @@ class StockChartsController < ApplicationController
     logger.info("param=#{params}")
 
     @id = params[:id]
+    @stock_price_params = params.slice(:start_date, :end_date)
 
     if @id.blank?
       logger.warn("missing symbol")
@@ -31,6 +32,7 @@ class StockChartsController < ApplicationController
 
   # GET /stock_charts/new
   # GET /stock_charts/new.json
+=begin
   def new
     @stock_chart = StockChart.new
 
@@ -39,6 +41,7 @@ class StockChartsController < ApplicationController
       format.json { render json: @stock_chart }
     end
   end
+=end
 
   # GET /stock_charts/1/edit
 =begin

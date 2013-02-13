@@ -1,9 +1,21 @@
 <h1>Stock Chart</h1>
 
-<%= form_tag(goto_stock_chart_path, method: "get") do %>
-    <%= label_tag :symbol, "Stock Symbol"  %><br/>
-    <%= text_field_tag :symbol %><br/>
+<% content_for :javascript_includes do %>
+  <script type="text/javascript">
+      $(function() {
+          $('.datepicker').datepicker(
+                  {
+                      dateFormat: "yy-mm-dd",
+                  }
+          );
+      });
+  </script>
+<% end %>
 
+<%= form_tag(goto_stock_chart_path, method: "get") do %>
+    <%= label_tag :symbol, "Stock Symbol"  %>  <%= text_field_tag :symbol %><br/>
+    <%= label_tag :start_date, "Start Date" %> <%= text_field_tag :start_date, nil, :class => 'datepicker' %>
+    <%= label_tag :end_date, "End Date" %> <%= text_field_tag :end_date, nil, :class => 'datepicker' %> <br/>
     <%= submit_tag :draw %>
 <% end %>
 

@@ -9,7 +9,7 @@
       function drawVisualization() {
         $.ajax(
         {
-          url: "<%= stock_price_url(@id) %>",
+          url: "<%= stock_price_url(@id, @stock_price_params) %>",
           dataType: "json",
           async: false,
           error: function(xhr, status, thrown) {

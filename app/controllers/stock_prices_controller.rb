@@ -5,6 +5,8 @@ class StockPricesController < ApplicationController
     logger.info("param=#{params}")
 
     symbol = params[:id]
+    start_date = params[:start_date]
+    end_date = params[:end_date]
     date_range = (Date.today - 30)..(Date.today - 1)
     logger.info("date_range1=#{date_range}")
 
