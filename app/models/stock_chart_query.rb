@@ -1,9 +1,5 @@
 class StockChartQuery
-  include ActiveModel::Validations
-  include ActiveModel::MassAssignmentSecurity
-  include ActiveModel::Conversion
-  include ActiveModel::Serializers::JSON
-  extend ActiveModel::Naming
+  include ActiveAttr::Model
 
   attr_accessor :symbol, :start_date, :end_date
 
@@ -13,8 +9,6 @@ class StockChartQuery
 
   validate :must_be_a_date_range
   validate :dates_must_be_in_the_past
-
-  cattr_accessor(:logger) {  ActiveRecord::Base.logger }
 
   def dates_must_be_in_the_past()
     attrs = [:start_date, :end_date]
@@ -40,7 +34,7 @@ class StockChartQuery
     end_date = self.send(end_date_attr)
 
     if end_date && start_date
-      errors.add(:end_date_attr, "end date must be on or after start date: start date=#{start_date}; end date=#{end_date} ") if start_date >= end_date
+      errors.add(end_date_attr, "end date must be on or after start date: start date=#{start_date}; end date=#{end_date} ") if start_date >= end_date
     end
   end
 
@@ -75,7 +69,7 @@ class StockChartQuery
   def end_date
     begin
       Date.parse(@end_date) unless @end_date.blank?
-    rescue Exeption => e
+    rescue Exception => e
       logger.info("#{self}: unable to parse end_date: #{@end_date}: #{e}")
       nil
     end

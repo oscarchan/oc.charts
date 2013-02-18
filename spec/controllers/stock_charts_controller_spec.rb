@@ -7,10 +7,5 @@ describe StockChartsController do
       get 'index'
       response.should be_success
     end
-
-    it "should be redirect" do
-      get '/goto_stock_chart'
-      response.should be_success
-    end
   end
 end

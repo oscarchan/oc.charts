@@ -18,8 +18,10 @@ describe StockChartQuery do
   context "should reject missing symbol" do
     before(:each) { form.symbol = nil }
 
-    it { should_not be_valid }
-    it { should have(1).error_on(:symbol) }
+    it {
+     should_not be_valid
+     should have(1).error_on(:symbol)
+    }
   end
 
   context "start and end dates " do
@@ -35,8 +37,10 @@ describe StockChartQuery do
         context "when #{attr} is the only one missing" do
           before(:each) { form.send("#{attr}=", nil) }
 
-          it { should_not be_valid }
-          it { should have(1).error_on(attr) }
+          it {
+            should_not be_valid
+            should have(1).error_on(attr)
+          }
         end
       end
     end
@@ -45,11 +49,14 @@ describe StockChartQuery do
       before(:each) {
         form.start_date = (Date.tomorrow).to_s
         form.end_date = (Date.tomorrow + 1).to_s
+        form.valid?
       }
 
-      it { should_not be_valid }
-      it { should have(1).error_on(:start_date)}
-      it { should have(1).error_on(:end_date)}
+      it {
+        should_not be_valid
+        should have(1).error_on(:start_date)
+        should have(1).error_on(:end_date)
+      }
     end
 
     context "should be a valid range" do
@@ -58,8 +65,10 @@ describe StockChartQuery do
         form.end_date = (Date.yesterday - 1).to_s
       }
 
-      it { should_not be_valid }
-      it { should have(1).error_on(:end_date)}
+      it {
+        should_not be_valid
+        should have(1).error_on(:end_date)
+      }
     end
 
   end

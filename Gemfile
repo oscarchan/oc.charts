@@ -45,6 +45,6 @@ gem 'factory_girl_rails', :group => [:development, :test]
 gem "database_cleaner", :group => :test
 gem "email_spec", :group => :test
 
-
+gem 'active_attr'
 gem 'date_validator'
 
