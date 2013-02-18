@@ -11,7 +11,7 @@
 <% end %>
 
 <%= tag("div", :id => 'visualization', :data => {
-        url: stock_price_url(@id, @stock_price_params),
+        url: stock_price_url(@stock_chart_query.serializable_hash),
         width: 1200,
         height: 600
 }) %>

@@ -1,8 +1,8 @@
 
 function drawVisualization(visual_div) {
     var url = visual_div.attr('data-url');
-    var width = visual_div.attr('data-width') || 1024
-    var height = visual_div.attr('data-height') || 400
+    var width = visual_div.attr('data-width') || 1024;
+    var height = visual_div.attr('data-height') || 400;
     $.ajax(
             {
                 url: url,
@@ -16,7 +16,7 @@ function drawVisualization(visual_div) {
 
                     dataTable = google.visualization.arrayToDataTable.apply(null, jsonData);
                     debugger;
-                    var options = { width: width, height: height}
+                    var options = { width: width, height: height};
 
 
                     var chart = new google.visualization.CandlestickChart(visual_div[0]);

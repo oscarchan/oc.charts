@@ -61,7 +61,14 @@ OcCharts::Application.routes.draw do
   # match '/goto_stock_chart', :to => redirect('/stock_charts/%{symbol}')  # not working unless symbol was in the first parameter
   # req - ActionDispatch::Request
   match 'goto_stock_chart', :to => redirect { |params, req|
-    "/stock_charts/#{req.query_parameters[:symbol]}?#{req.query_parameters.except(:symbol).to_query}"
+    # TODO: there may be a gem doing this
+    # alternative is to move to a controller
+    query_params = req.parameters[:stock_chart_query]
+    query_params = req.parameters if query_params.nil?
+    query = StockChartQuery.new(query_params)
+
+    next "/stock_charts/#{req.parameters.to_query}" if query.symbol.blank?  #error case
+    "/stock_charts/#{query.symbol}?#{query.serializable_hash.to_query(:stock_chart_query)}"
   }
 
   resources :stock_prices, :only => [:show]

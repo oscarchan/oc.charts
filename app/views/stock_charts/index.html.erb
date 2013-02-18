@@ -12,12 +12,24 @@
   </script>
 <% end %>
 
-<%= form_tag(goto_stock_chart_path, method: "get") do %>
-    <%= label_tag :symbol, "Stock Symbol"  %>  <%= text_field_tag :symbol %><br/>
-    <%= label_tag :start_date, "Start Date" %> <%= text_field_tag :start_date, nil, :class => 'datepicker' %>
-    <%= label_tag :end_date, "End Date" %> <%= text_field_tag :end_date, nil, :class => 'datepicker' %> <br/>
-    <%= submit_tag :draw %>
+<%= form_for @stock_chart_query, :url => goto_stock_chart_url, :method => 'get'  do |f| %>
+    <% if @stock_chart_query.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@stock_chart_query.errors.count, "error") %>: </h2>
+          <ul>
+            <% @stock_chart_query.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <%= f.label :symbol, "Stock Symbol" %><%= f.text_field :symbol %> <br/>
+    <%= f.label :start_date, "Start Date" %> <%= f.text_field :start_date, :class => 'datepicker' %>
+    <%= f.label :end_date, "End Date" %> <%= f.text_field :end_date, :class => 'datepicker' %> <br/>
+    <%= f.submit "Draw Chart" %>
 <% end %>
+
 
 <!--
 <table>

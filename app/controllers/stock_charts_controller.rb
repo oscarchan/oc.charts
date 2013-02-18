@@ -3,6 +3,8 @@ class StockChartsController < ApplicationController
   # GET /stock_charts
   # GET /stock_charts.json
   def index
+    @stock_chart_query = StockChartQuery.new
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @stock_charts }
@@ -12,13 +14,10 @@ class StockChartsController < ApplicationController
   # GET /stock_charts/1
   # GET /stock_charts/1.json
   def show
-    logger.info("param=#{params}")
+    @stock_chart_query = StockChartQuery.new(params[:stock_chart_query])
 
-    @id = params[:id]
-    @stock_price_params = params.slice(:start_date, :end_date)
-
-    if @id.blank?
-      logger.warn("missing symbol")
+    unless @stock_chart_query.valid?
+      logger.warn("missing symbol: #{@stock_chart_query.errors.as_json}")
       flash[:error] = 'missing stock symbol'
       redirect_to :action => 'index'
       return 
@@ -26,7 +25,6 @@ class StockChartsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @stock_chart }
     end
   end
 
