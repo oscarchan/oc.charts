@@ -71,5 +71,13 @@ describe StockChartQuery do
       }
     end
 
+    it "should reject invalid dates" do
+      form.start_date = "sdfdsfsd dsf"
+      form.end_date = "ewsdfsd sdf"
+      should_not be_valid
+      should have(1).error_on(:start_date)
+      should have(1).error_on(:end_date)
+    end
+
   end
 end

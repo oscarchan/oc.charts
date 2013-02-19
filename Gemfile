@@ -46,5 +46,6 @@ gem "database_cleaner", :group => :test
 gem "email_spec", :group => :test
 
 gem 'active_attr'
-gem 'date_validator'
+gem 'validates_timeliness', '~> 3.0'
+
 
