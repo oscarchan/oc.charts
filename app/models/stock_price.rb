@@ -16,10 +16,10 @@ class StockPrice  < ActiveResource::Base
     float 'low', 'open', 'close', 'high'
   end
 
-  def low()   attributes['low'].to_f end
-  def open()  attributes['open'].to_f end
-  def close() attributes['close'].to_f end
-  def high()  attributes['high'].to_f end
+  def low()   attributes[:low].to_f end
+  def open()  attributes[:open].to_f end
+  def close() attributes[:close].to_f end
+  def high()  attributes[:high].to_f end
 
   class << self
     def query_string(options)
@@ -34,7 +34,7 @@ class StockPrice  < ActiveResource::Base
   end
 
 
-  def self.find_historical_price(symbol, date_range, interval = :daily)
+  def self.find_historical_prices(symbol, date_range, interval = :daily)
     start_at = date_range.begin
     end_at = date_range.end
 
